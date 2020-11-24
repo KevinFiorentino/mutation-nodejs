@@ -6,14 +6,11 @@ export interface DNA {
   dna: string;
 }
 
-export function algorithmIdentifyDNA() { //: Promise<string> {
+export function algorithmIdentifyDNA(DNA: String[]): Promise<any> {
   return new Promise((resolve, reject) => {
-    forked.on('message', msg => {
-      console.log('Mensaje del hijo: ', msg)
-      resolve(msg);
+    forked.on('message', result => {
+      resolve(result);
     })
-    setTimeout(() => {
-      forked.send({mensaje: 'Hola!'})
-    }, 1000)
+    forked.send({ DNA })
   });
 }
