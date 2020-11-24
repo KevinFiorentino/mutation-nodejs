@@ -4,6 +4,8 @@ import logger from 'morgan';
 
 import { mutationRouter } from './routes/mutation.router';
 
+// (\b[aA]{4}|[tT]{4}|[gG]{4}|[cC]{4}\b)(?!.*\1)
+
 const app = express();
 app.use(express.json());
 app.use(cors());
