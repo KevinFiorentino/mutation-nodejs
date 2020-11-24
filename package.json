@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "pm2-runtime start ecosystem.config.js",
+    "dev": "nodemon index.ts",
     "postinstall": "tsc",
     "build": "tsc --project ./"
   },
@@ -15,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.6",
     "pm2": "^4.5.0"
   },
   "devDependencies": {
