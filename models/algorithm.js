@@ -77,7 +77,7 @@ function turnMatrix(DNA) {
     newMatriz.push(newRow);
   }
 
-  console.log(newMatriz);
+  console.log("90 GRADOS", newMatriz);
 
   return newMatriz;
 }
