@@ -1,12 +1,12 @@
 process.on('message', DNA => {
   console.log("DNA llegó al hijo: ", DNA)
 
-  const result = validateDNA(DNA['DNA']);
+  const result = hasMutation(DNA['DNA']);
 
   process.send(result);
 })
 
-function validateDNA(DNA) {
+function hasMutation(DNA) {
 
   /* ====================================================== */
   /*  Primero validamos la estructura del array de entrada  */
@@ -45,8 +45,15 @@ function validateDNA(DNA) {
     /*  Si no lo logramos validar, buscamos si hay una "mutación" en vertical  */
     /* ======================================================================= */
 
-    // Giramos la matriz 90 grados para validarla horizontalmente
     const matrix90 = turnMatrix(DNA);
+
+    for (let i = 0; i < matrix90.length; i++) {
+      let resultRow = /(\b[aA]{4}|[tT]{4}|[gG]{4}|[cC]{4}\b)(?!.*\1)/.test(matrix90[i]);
+      if (resultRow) {
+        // Si lo encontramos, termina el algoritmo
+        return true;
+      }
+    }
 
     return false;
   }
@@ -56,11 +63,26 @@ function validateDNA(DNA) {
 
 }
 
+// Giramos la matriz 90 grados para validarla horizontalmente
 function turnMatrix(DNA) {
 
-  return true;
+  let newMatriz = [];
+  const lengthCol = DNA[0].length;
+
+  for (let i = 0; i < lengthCol; i++) {
+    let newRow = ""; 
+    for (let j = 0; j < DNA.length; j++) {
+      newRow += DNA[j].substr(i, 1)
+    }
+    newMatriz.push(newRow);
+  }
+
+  console.log(newMatriz);
+
+  return newMatriz;
 }
 
 module.exports = {
-  validateDNA
+  hasMutation,
+  turnMatrix
 }
