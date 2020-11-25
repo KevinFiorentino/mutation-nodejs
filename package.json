@@ -5,9 +5,7 @@
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js",
     "dev": "nodemon index.ts",
-    "postinstall": "tsc",
-    "build": "tsc --project ./",
-    "test": "tsc --project ./ && jasmine build/spec/mutation/mutation.spec.js"
+    "test": "nyc node spec/support/specs.js"
   },
   "engines": {
     "node": "12.11.1",
@@ -23,6 +21,20 @@
   "devDependencies": {
     "jasmine": "^3.6.3",
     "jasmine-console-reporter": "^3.1.0",
-    "jasmine-spec-reporter": "^6.0.0"
+    "jasmine-spec-reporter": "^6.0.0",
+    "nyc": "^15.1.0"
+  },
+  "nyc": {
+    "report-dir": "./spec/istanbul/report",
+    "temp-dir": "./spec/istanbul",
+    "reporter": [
+      "text",
+      "text-summary",
+      "html"
+    ],
+    "exclude": [
+      "spec/**/*",
+      "server/*.spec.js"
+    ]
   }
 }
