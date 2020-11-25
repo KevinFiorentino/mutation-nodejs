@@ -1,8 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import logger from 'morgan';
+const express = require('express');
+const cors = require('cors');
+const logger = require('morgan');
 
-import { mutationRouter } from './routes/mutation.router';
+const { mutationRouter } = require('./routes/mutation.router');
 
 const app = express();
 app.use(express.json());

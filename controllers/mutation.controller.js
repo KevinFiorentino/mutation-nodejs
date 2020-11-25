@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
-import { DNA, algorithmIdentifyDNA } from '../models/mutation.model';
+const { algorithmIdentifyDNA } = require('../models/mutation.model');
 
-export const identifyDNA = async (req: Request, res: Response) => {
+const identifyDNA = async (req, res) => {
   try {
     const DNA = req.body.dna;
     const resultDNA = await algorithmIdentifyDNA(DNA);
@@ -10,4 +9,8 @@ export const identifyDNA = async (req: Request, res: Response) => {
   catch (error) {
     res.status(500).send(error);
   }
+}
+
+module.exports = {
+  identifyDNA
 }

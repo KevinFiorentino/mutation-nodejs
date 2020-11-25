@@ -1,14 +1,16 @@
 process.on('message', DNA => {
   console.log("DNA llegó al hijo: ", DNA)
 
-  const result = velidateDNA(DNA['DNA']);
+  const result = validateDNA(DNA['DNA']);
 
-  (<any> process).send(result);
+  process.send(result);
 })
 
-function velidateDNA(DNA: string[]): boolean {
+function validateDNA(DNA) {
 
-  /* Primero validamos la estructura del array de entrada */
+  /* ====================================================== */
+  /*  Primero validamos la estructura del array de entrada  */
+  /* ====================================================== */
 
   // Guardamos la cantidad de filas y la cantidad de columnas de la primera fila para usar de referencia.
   const cantRows = DNA.length;
@@ -27,15 +29,24 @@ function velidateDNA(DNA: string[]): boolean {
       return false;
     }
 
-    /* Segundo, validamos si hay una "mutación" en horizontal */
+    /* ======================================================== */
+    /*  Segundo, validamos si hay una "mutación" en horizontal  */
+    /* ======================================================== */
+
     for (let i = 0; i < DNA.length; i++) {
       let resultRow = /(\b[aA]{4}|[tT]{4}|[gG]{4}|[cC]{4}\b)(?!.*\1)/.test(DNA[i]);
       if (resultRow) {
+        // Si lo encontramos, termina el algoritmo
         return true;
       }
     }
 
-    /* Tercero, validamos si hay una "mutación" en vertical */
+    /* ======================================================================= */
+    /*  Si no lo logramos validar, buscamos si hay una "mutación" en vertical  */
+    /* ======================================================================= */
+
+    // Giramos la matriz 90 grados para validarla horizontalmente
+    const matrix90 = turnMatrix(DNA);
 
     return false;
   }
@@ -45,7 +56,11 @@ function velidateDNA(DNA: string[]): boolean {
 
 }
 
-// Validamos que el array de string esté bien estructurado
-function valdateArrayStrings() {
+function turnMatrix(DNA) {
 
+  return true;
+}
+
+module.exports = {
+  validateDNA
 }
