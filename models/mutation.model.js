@@ -7,7 +7,7 @@ function algorithmIdentifyDNA(DNA) {
   return new Promise((resolve, reject) => {
     forked.on('message', result => {
 
-      const mutation = {
+/*       const mutation = {
         dna: DNA.join(),
         status: result
       }
@@ -15,7 +15,9 @@ function algorithmIdentifyDNA(DNA) {
         (error) => {
           if (error) reject(error);
           resolve(result);
-      });
+      }); */
+
+      resolve(result);
 
     })
     forked.send({ DNA })
