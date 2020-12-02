@@ -59,6 +59,8 @@ function hasMutation(DNA) {
     /*  Si no lo logramos validar, buscamos si hay una "mutación" en oblicuo  */
     /* ====================================================================== */
 
+    // EXPLICACIÓN DEL ALGORITMO EN OBLIQUE.md
+
     const oblique_matrix = obliqueMatrixGenerator(DNA);
 
     let flag = true;
