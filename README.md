@@ -2,13 +2,26 @@
 
 ### Run DEV
 
-- npm run dev
+- `npm run dev`
 
 ### Run Prod
 
-- npm run start
+- `npm run start`
 
 ### Testing
 
-- npm run test
+- `npm run test`
 - Dentro de spec/istanbul/report puede encontrarse un .html para visualizar el coverage en el código.
+
+---
+
+### Endpoints
+
+- POST
+    - `{BASE_URL}/mutation`
+        ``` 
+        { 
+            "dna": ["ATGC","CAGT","TCAG","TTCA"] 
+        } 
+        ```
+
