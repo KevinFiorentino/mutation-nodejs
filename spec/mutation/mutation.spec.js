@@ -45,6 +45,14 @@ describe('Testing algorithm vertical', () => {
     });
 })
 
+describe('Testing algorithm oblicuo', () => {
+    it('matriz 4x4 correcta con mutación', () => {
+        const arr = ["ATGC", "CAGT", "TCAG", "TTCA"];
+        const result = hasMutation(arr);
+        expect(result).toBeTruthy();
+    });
+})
+
 describe('Testing turnMatrix', () => {
     it('girar matriz numérica 90 grados', () => {
         const arr = ['1111', '2222', '3333', '4444'];
