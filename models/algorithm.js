@@ -55,6 +55,55 @@ function hasMutation(DNA) {
       }
     }
 
+    /* ====================================================================== */
+    /*  Si no lo logramos validar, buscamos si hay una "mutación" en oblicuo  */
+    /* ====================================================================== */
+
+    const oblique_matrix = obliqueMatrixGenerator(DNA);
+
+    let flag = true;
+    do {
+      const arr_dna = oblique_matrix.next().value;
+      if(arr_dna) {
+        const new_arr_dna = arr_dna.map((e,i) => {
+          if (i === 1) {
+            let split = e.split("");
+            split.push(split.shift());
+            return split.join("");
+          }
+          if (i === 2) {
+            let split = e.split("");
+            split.push(split.shift());
+            split.push(split.shift());
+            return split.join("");
+          }
+          if (i === 3) {
+            let split = e.split("");
+            split.push(split.shift());
+            split.push(split.shift());
+            split.push(split.shift());
+            return split.join("");
+          }
+          return e;
+        });
+
+        const arr_dna_matrix90 = turnMatrix(new_arr_dna);
+
+        for (let i = 0; i < arr_dna_matrix90.length; i++) {
+          let resultRow = /(\b[aA]{4}|[tT]{4}|[gG]{4}|[cC]{4}\b)(?!.*\1)/.test(arr_dna_matrix90[i]);
+          if (resultRow) {
+            flag = false;
+            return true;    // FIN ALGORITMO
+          }
+        }
+    
+      }
+      else {
+        flag = false;
+      }
+      
+    } while (flag);
+
     return false;
   }
   else {
@@ -77,10 +126,19 @@ function turnMatrix(DNA) {
     newMatriz.push(newRow);
   }
 
-  console.log("90 GRADOS", newMatriz);
-
   return newMatriz;
 }
+
+
+function* obliqueMatrixGenerator(DNA) {
+  const cantRows = DNA.length;
+
+  for (let i = 0; i < cantRows-3; i++) {
+    let end = i;
+    yield DNA.slice(i, end+4);
+  }
+}
+
 
 module.exports = {
   hasMutation,
